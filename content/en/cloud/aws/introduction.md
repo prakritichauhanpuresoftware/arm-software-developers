@@ -65,10 +65,38 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
    
  ## Step-6
  ### Review And Launch
-   check the details in summary box and press launch.
+   check the details in summary box and press "launch".
 
    ![image](https://user-images.githubusercontent.com/87687468/189878839-3ef022f7-2be7-458a-b0ce-20cf5ee0bcaa.png)
 
+ ## Step-7
+ ### SSH to launched instance
+   Once the server get launched we can login using SSH. For that, we would require to access the key pair (Pem file) which we have Downloaded. if we check the            permissions of .pem file, we might see that the permission for the Pem file is-
    
+   ```
+   rw-r--r--
+   ```
+
+   This means that other people can also read this Pem file. This is not allowed for SSH Pem files. So, we will have to change the permission for this Pem file to 400.
    
+   ```
+   $ chmod 400 demoserver.pem
+   ```
+   
+   Now, only the current user can read this Pem file and these are permission that a Pem file expects.
+   Select the Instance by checking the box of that perticular server and GO TO >> connect
+   
+   ![image](https://user-images.githubusercontent.com/87687468/190094594-19ebf2dc-de3f-449d-bbb1-30089346ceb3.png)
+   
+   Here in SSH Client, u can find the details to ssh that instance.
+   
+   ![image](https://user-images.githubusercontent.com/87687468/190095052-41851f3d-61db-486f-9c00-2f504587bdcc.png)
+   
+   Since, I am in the same directory where the Pem file is present. I do not need the full path for the pem file.
+   Use following command to ssh an instance:
+   
+   ```
+   ssh -i "demoserver.pem" ubuntu@<Public IP/DNS address>
+   ```
+
 
