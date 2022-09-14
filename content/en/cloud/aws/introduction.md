@@ -100,3 +100,51 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
    ```
 
 
+## How to deploy Graviton based EC2 instances with Terraform
+   This guide will help you to Create your first AWS EC2 using terraform.
+   When it comes to IAC(Infrastructure As Code) Terraform is always the first choice of DevOps although there are many alternatives available in the market such as        Ansible, Chef, Puppet, SaltStack, CloudFormation but due the fact that -
+   
+   1. Terraform is really easy install
+   2. Terraform has very good API documentation
+   3. It is widely adopted in the DevOps community
+   4. Great support for a popular cloud service provider such as Google Cloud Platform, AWS.
+
+### Prerequisite
+   The only prerequisite is - You must install Terraform before jumping to AWS instance Setup.
+   
+### Table of Content
+   1. Setup AWS Account
+   2. Generate Access keys (access key ID and secret access key)
+   3. Create your first Terraform infrastructure (main.tf)
+   4. terraform commands
+
+### 1. Setup AWS Account
+   As our aim of this article to setup an AWS EC2 instance the first step would be to create an AWS account.
+   If you are a beginner and want to learn the Terraform then AWS provides you free tier - 12 months or 750 Hours/month, where you can experiment.
+
+### 1.1 Sign up for AWS account
+   Goto https://aws.amazon.com/ and click on Complete sign-up
+      
+   ![image](https://user-images.githubusercontent.com/87687468/190132437-19f68942-53b5-4837-9706-31a777d0f930.png)
+      
+   You need to choose AMAZON EC2 Free Tier. This tier is sufficient enough for learning purposes.
+      
+   ![image](https://user-images.githubusercontent.com/87687468/190132636-1312ee45-f68d-46d2-bddb-c4285816ca1a.png)
+
+   Amazon will ask for your Credit card number to complete the sign-up process, AWS will debit around 1$ so that they can verify your card details. Amazon will           refund the amount after the authorization.
+
+### 1.2 After Signup LogIn as ROOT user
+   
+   After signup, you need to log in as a ROOT user for your AWS account.
+      
+   ![image](https://user-images.githubusercontent.com/87687468/190132990-5fe0f4b9-5808-4bff-a321-b1d72b9bc2d5.png)
+      
+   Once you login into your AWS account you should see below dashboard
+      
+   ![image](https://user-images.githubusercontent.com/87687468/190133678-18fe9da6-e7f5-4e78-aeb2-35386bbb17cd.png)
+      
+      
+
+
+
+
