@@ -164,6 +164,93 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
 ### 3. Create your first Terraform infrastructure (main.tf)
    Before we start writing terraform script, the first thing to learn over here is - "You need to save your configuration with .tf extension". We will start by            creating an empty main.tf file.
    
+   3.1 Provider
+   The first line of code in which we are going to write is provider. We need to tell terraform which cloud provider we are going to connect .e.g - AWS, Google, or        Azure
 
+   As this article is focused on AWS, so we are going to mention AWS as our provider.
+
+   Here is the basic syntax for the provider
+      
+      resource "<PROVIDER>_<TYPE>" "<NAME>" {
+      [CONFIG …]
+      }
+      
+   1. "PROVIDER _ TYPE" - aws, google
+   2. "NAME" - You can define your name
+   
+   This is how our final main.tf will look like for AWS -
+   
+      provider "aws" {
+      region     = "eu-central-1"
+      access_key = "XXXXXXXXXXXXXXXXXXXX"
+      secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+      } 
+      
+   3.2 resource - "aws_instance"
+   Now after defining the provider, next we are going define is resource. 
+   So what do you mean by resource?
+   Resource - It is something that we are going to provision/start on AWS. Now for this article, we are going to provision EC2 instance on AWS.
+   But before we provision the EC2 instance, we need to gather few points -
+   1. ami = you need to tell Terraform which AMI(Amazon Machine Image) you are going to use. Is it going to be Ubuntu, CentOS or something else
+   2. instance_type = Also based on your need you have to choose the instance_type and it can be t2.nano, t2.micro, t2. small etc.
+
+   3.3 How to find ami(Amazon Machine Image)
+   
+   1. To find the correct ami you need to Goto: EC2
+   
+   ![image](https://user-images.githubusercontent.com/87687468/190343196-051e752a-a61d-4a6b-80d6-25369f41e97c.png)
+   
+   2. In the left Navigation you will find Images -> AMIs
+   
+   ![image](https://user-images.githubusercontent.com/87687468/190343512-54fb7a3c-d048-4c23-bb66-0a0ebfb0fa80.png)
+   
+   3. On the search menu click on public images and then apply filters as per your reuirment. e.g. architecture=arm64, platform=ubuntu.
+      copy the AMI ID from the search result.
+   
+   ![image](https://user-images.githubusercontent.com/87687468/190345166-846344fe-09b8-4ab8-96b0-907b67fd0abd.png)
+
+   3.4 How to find correct instance_type
+   
+   We can find the correct ìnstance_type` by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
+
+   Since I am looking for a very basic instance_type not production level instance, so I choose t2.micro
+   Here is the aws_instance configuration -
+   
+      resource "aws_instance" "ec2_example" {
+      ami = "ami-0767046d1677be5a0"  
+      instance_type = "t2.micro" 
+      tags = {
+         Name = "Terraform EC2"
+         }
+      }
+    
+   4. terraform commands
+    
+   now we have completed all the pre-requisites for provisioning our first ec2 instance on the AWS.
+    
+   4.1 terraform plan
+    
+   The first command which we are going to run is -
+    
+   ![image](https://user-images.githubusercontent.com/87687468/190346484-4aa27809-c1ab-44ed-989b-9dcb232345f3.png)
+    
+   ![image](https://user-images.githubusercontent.com/87687468/190346590-e5be6def-5d6b-470a-a0cb-1057a1334cd7.png)
+      
+   The terraform init command is responsible for downloading all the dependencies which are required for the provider AWS.
+   Once you issue the terraform init command it will download all the provider's dependencies on your local machine.
+
+   4.2 terraform plan
+   
+   This command will help you to understand how many resources you are gonna add or delete.
+
+   Here is the command -
+
+   ![image](https://user-images.githubusercontent.com/87687468/190347066-fa9cd09e-b3f0-44f1-9621-043bbc4b972d.png)
+
+
+
+
+   
+   
 
 
