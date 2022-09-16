@@ -164,7 +164,7 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
 ### 3. Create your first Terraform infrastructure (main.tf)
    Before we start writing terraform script, the first thing to learn over here is - "You need to save your configuration with .tf extension". We will start by            creating an empty main.tf file.
    
-   3.1 Provider
+###   3.1 Provider
    The first line of code in which we are going to write is provider. We need to tell terraform which cloud provider we are going to connect .e.g - AWS, Google, or        Azure
 
    As this article is focused on AWS, so we are going to mention AWS as our provider.
@@ -186,7 +186,7 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
       secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
       } 
       
-   3.2 resource - "aws_instance"
+###   3.2 resource - "aws_instance"
    Now after defining the provider, next we are going define is resource. 
    So what do you mean by resource?
    Resource - It is something that we are going to provision/start on AWS. Now for this article, we are going to provision EC2 instance on AWS.
@@ -194,7 +194,7 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
    1. ami = you need to tell Terraform which AMI(Amazon Machine Image) you are going to use. Is it going to be Ubuntu, CentOS or something else
    2. instance_type = Also based on your need you have to choose the instance_type and it can be t2.nano, t2.micro, t2. small etc.
 
-   3.3 How to find ami(Amazon Machine Image)
+###   3.3 How to find ami(Amazon Machine Image)
    
    1. To find the correct ami you need to Goto: EC2
    
@@ -209,7 +209,7 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
    
    ![image](https://user-images.githubusercontent.com/87687468/190345166-846344fe-09b8-4ab8-96b0-907b67fd0abd.png)
 
-   3.4 How to find correct instance_type
+###   3.4 How to find correct instance_type
    
    We can find the correct ìnstance_type` by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
 
@@ -224,11 +224,11 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
          }
       }
     
-   4. terraform commands
+###   4. terraform commands
     
    now we have completed all the pre-requisites for provisioning our first ec2 instance on the AWS.
     
-   4.1 terraform plan
+###   4.1 terraform init
     
    The first command which we are going to run is -
     
@@ -239,13 +239,43 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
    The terraform init command is responsible for downloading all the dependencies which are required for the provider AWS.
    Once you issue the terraform init command it will download all the provider's dependencies on your local machine.
 
-   4.2 terraform plan
+###   4.2 terraform plan
    
    This command will help you to understand how many resources you are gonna add or delete.
 
    Here is the command -
 
    ![image](https://user-images.githubusercontent.com/87687468/190347066-fa9cd09e-b3f0-44f1-9621-043bbc4b972d.png)
+   
+###   4.3 terraform apply
+   This command will do some real stuff on AWS. Once you will issue this command, it will be going to connect to AWS and then finally going to provision AWS instance.
+
+   Here is the command -   
+   
+   ![image](https://user-images.githubusercontent.com/87687468/190377240-b37c607f-38b3-415d-836e-ae84abfd627b.png)
+
+   As you can see the log output has created t2.micro instance.
+   
+### 4.4 Verify the EC2 setup
+   Let's verify the setup by going back to AWS console.
+
+   Goto -> EC2 -> instances you should see 1 instance running.   
+   
+   ![image](https://user-images.githubusercontent.com/87687468/190378211-484df7ca-87d3-4097-b2e0-635e0b34bbbf.png)
+
+   You can also see the Tag name - Terraform EC2 which we mentioned in the terraform script.
+   
+### 4.4 terraform destroy
+   
+   Now we have seen how to write your terraform script and how to provision your EC2 instance.
+
+   Let see how to remove or delete everything from AWS.
+
+   We are going to use the command -
+   
+   ![image](https://user-images.githubusercontent.com/87687468/190385964-c54095c3-88be-4eae-a131-0fb41cad24cb.png)
+
+   It will remove all the running EC2 Instances.
 
 
 
