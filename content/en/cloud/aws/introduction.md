@@ -223,7 +223,26 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
          Name = "Terraform EC2"
          }
       }
-    
+
+### 4. Generate key-pair(public key, private key) using ssh keygen
+   4.1 Generate the public key and private key
+       Before you start playing with AWS console and terraform script we need to first generate the key-pair(public key, private key) using ssh-keygen.
+       Later we are going to associate both public and private keys with AWS EC2 instances.
+
+       Let us generate the key pair using the following command
+       
+       ![image](https://user-images.githubusercontent.com/87687468/190583662-2e3e8b2f-4ed9-488f-ab83-9e81c64020e1.png)
+
+      By default, the above command will generate the public as well as private key at location '/home//.ssh'
+
+      But we can override the end destination with a custom path. (I have assigned my custom path /home/rahul/Jhooq/keys/aws followed my key name .i.e. aws_key )
+
+      Here is the output along with a screenshot my terminal-
+       
+       
+       
+
+
 ###   4. terraform commands
     
    now we have completed all the pre-requisites for provisioning our first ec2 instance on the AWS.
