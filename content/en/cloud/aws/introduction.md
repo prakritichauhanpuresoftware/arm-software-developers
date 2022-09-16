@@ -225,29 +225,105 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
       }
 
 ### 4. Generate key-pair(public key, private key) using ssh keygen
-   4.1 Generate the public key and private key
-       Before you start playing with AWS console and terraform script we need to first generate the key-pair(public key, private key) using ssh-keygen.
-       Later we are going to associate both public and private keys with AWS EC2 instances.
+4.1 Generate the public key and private key
+    Before you start playing with AWS console and terraform script we need to first generate the key-pair(public key, private key) using ssh-keygen.
+    Later we are going to associate both public and private keys with AWS EC2 instances.
 
-       Let us generate the key pair using the following command
+    Let us generate the key pair using the following command
        
-       ![image](https://user-images.githubusercontent.com/87687468/190583662-2e3e8b2f-4ed9-488f-ab83-9e81c64020e1.png)
+    ![image](https://user-images.githubusercontent.com/87687468/190583662-2e3e8b2f-4ed9-488f-ab83-9e81c64020e1.png)
 
-      By default, the above command will generate the public as well as private key at location '/home//.ssh'
+    By default, the above command will generate the public as well as private key at location '/home//.ssh'
+    But we can override the end destination with a custom path. (I have assigned my custom path /home/ubuntu/akhand/aws/ followed my key name .i.e. aws_key )
+    Here is the output along with a screenshot my terminal-
+      
+    ![image](https://user-images.githubusercontent.com/87687468/190586768-a500f98a-18ce-4e68-8111-9d784ed75b8a.png)
+      
+4.2 Verify the generated public key and private key
+     In the previous step, we have generated the key-pair which we are going to use for provisioning the EC2 instance. But let us take a look at the keys and how it        looks.
 
-      But we can override the end destination with a custom path. (I have assigned my custom path /home/rahul/Jhooq/keys/aws followed my key name .i.e. aws_key )
+     If you remember in the previous step we have generated the keys at path /home/ubuntu/akhand/aws/ we should see two key files over there -
 
-      Here is the output along with a screenshot my terminal-
+   1. aws_key (private key)
+   2. aws_key.pub (public key)
+   
+   We are going to use public key aws_key.pub inside the terraform file to provision/start the ec2 instance.
+   
+4.3 Use public key to start EC2 instance
+    Alright,  now we have the public key and the private key with us, let us create our terraform configuration file using the public key .i.e. aws_key.pub
+
+    Here is the main.tf -
+    
+         provider "aws" {
+         region     = "eu-central-1"
+         access_key = "AKIATQ37NXB2BYDxxxxx"
+         secret_key = "JzZKiCia2vjbq4zGGGewdbOhnacm2QIMgcBxxxxx"
+
+      }
+
+      resource "aws_instance" "ec2_example" {
+
+          ami = "ami-0767046d1677be5a0"  
+          instance_type = "t2.micro" 
+          key_name= "aws_key"
+          vpc_security_group_ids = [aws_security_group.main.id]
+
+        provisioner "remote-exec" {
+          inline = [
+            "touch hello.txt",
+            "echo helloworld remote provisioner >> hello.txt",
+          ]
+        }
+        connection {
+            type        = "ssh"
+            host        = self.public_ip
+            user        = "ubuntu"
+            private_key = file("/home/rahul/Jhooq/keys/aws/aws_key")
+            timeout     = "4m"
+         }
+      }
+
+      resource "aws_security_group" "main" {
+        egress = [
+          {
+            cidr_blocks      = [ "0.0.0.0/0", ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1"
+            security_groups  = []
+            self             = false
+            to_port          = 0
+          }
+        ]
+       ingress                = [
+         {
+           cidr_blocks      = [ "0.0.0.0/0", ]
+           description      = ""
+           from_port        = 22
+           ipv6_cidr_blocks = []
+           prefix_list_ids  = []
+           protocol         = "tcp"
+           security_groups  = []
+           self             = false
+           to_port          = 22
+        }
+        ]
+      }
+
+
+      resource "aws_key_pair" "deployer" {
+        key_name   = "aws_key"
+        public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbvRN/gvQBhFe+dE8p3Q865T/xTKgjqTjj56p1IIKbq8SDyOybE8ia0rMPcBLAKds+wjePIYpTtRxT9UsUbZJTgF+SGSG2dC6+ohCQpi6F3xM7ryL9fy3BNCT5aPrwbR862jcOIfv     7R1xVfH8OS0WZa8DpVy5kTeutsuH5suehdngba4KhYLTzIdhM7UKJvNoUMRBaxAqIAThqH9Vt/iR1WpXgazoPw6dyPssa7ye6tUPRipmPTZukfpxcPlsqytXWlXm7R89xAY9OXkdPPVsrQdkdfhnY8aFb9XaZP8cm7EOVRdxMsA1DyWMVZOTjhBwCHfEIGoePAS3jFMqQjGWQd rahul@rahul-HP-ZBook-15-G2"
+      }                          
        
        
-       
-
-
-###   4. terraform commands
+###   5. terraform commands
     
    now we have completed all the pre-requisites for provisioning our first ec2 instance on the AWS.
     
-###   4.1 terraform init
+###   5.1 terraform init
     
    The first command which we are going to run is -
     
@@ -258,7 +334,7 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
    The terraform init command is responsible for downloading all the dependencies which are required for the provider AWS.
    Once you issue the terraform init command it will download all the provider's dependencies on your local machine.
 
-###   4.2 terraform plan
+###   5.2 terraform plan
    
    This command will help you to understand how many resources you are gonna add or delete.
 
@@ -266,7 +342,7 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
 
    ![image](https://user-images.githubusercontent.com/87687468/190347066-fa9cd09e-b3f0-44f1-9621-043bbc4b972d.png)
    
-###   4.3 terraform apply
+###   5.3 terraform apply
    This command will do some real stuff on AWS. Once you will issue this command, it will be going to connect to AWS and then finally going to provision AWS instance.
 
    Here is the command -   
@@ -275,7 +351,7 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
 
    As you can see the log output has created t2.micro instance.
    
-### 4.4 Verify the EC2 setup
+### 5.4 Verify the EC2 setup
    Let's verify the setup by going back to AWS console.
 
    Goto -> EC2 -> instances you should see 1 instance running.   
@@ -284,7 +360,14 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
 
    You can also see the Tag name - Terraform EC2 which we mentioned in the terraform script.
    
-### 4.4 terraform destroy
+### 5.5 Use private key 'aws_key' to SSH into EC2 instance
+In the previous step, we have started the EC2 instance, now we need to connect to EC2 instance using the private key.
+
+You can find the connect command from the aws console -
+
+![image](https://user-images.githubusercontent.com/87687468/190621116-0e9fb285-960f-437d-bfc0-77352349372c.png)   
+   
+### 5.6 terraform destroy
    
    Now we have seen how to write your terraform script and how to provision your EC2 instance.
 
