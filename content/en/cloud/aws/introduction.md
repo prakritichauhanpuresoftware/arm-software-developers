@@ -264,7 +264,7 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
       resource "aws_instance" "ec2_example" {
 
           ami = "ami-0767046d1677be5a0"  
-          instance_type = "t2.micro" 
+          instance_type = "t4g.nano" 
           key_name= "aws_key"
           vpc_security_group_ids = [aws_security_group.main.id]
 
