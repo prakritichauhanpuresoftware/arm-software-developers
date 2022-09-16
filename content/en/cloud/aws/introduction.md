@@ -274,6 +274,9 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
             "echo helloworld remote provisioner >> hello.txt",
           ]
         }
+        provisioner "local-exec" {
+            command = "echo ${self.private_ip} >> private_ips.txt && echo ${self.public_ip} >> public_ips.txt && echo ${self.public_dns} >> public_ips.txt"
+        }
         connection {
             type        = "ssh"
             host        = self.public_ip
