@@ -255,7 +255,7 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
     Here is the main.tf -
     
          provider "aws" {
-         region     = "eu-central-1"
+         region     = "us-east-2"
          access_key = "AKIATQ37NXB2BYDxxxxx"
          secret_key = "JzZKiCia2vjbq4zGGGewdbOhnacm2QIMgcBxxxxx"
 
@@ -263,7 +263,7 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
 
       resource "aws_instance" "ec2_example" {
 
-          ami = "ami-0767046d1677be5a0"  
+          ami = "ami-0b4fa084a1e7e6f5a"  
           instance_type = "t4g.nano" 
           key_name= "aws_key"
           vpc_security_group_ids = [aws_security_group.main.id]
@@ -281,7 +281,7 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
             type        = "ssh"
             host        = self.public_ip
             user        = "ubuntu"
-            private_key = file("/home/rahul/Jhooq/keys/aws/aws_key")
+            private_key = file("/home/ubuntu/akhand/aws/aws_key")
             timeout     = "4m"
          }
       }
