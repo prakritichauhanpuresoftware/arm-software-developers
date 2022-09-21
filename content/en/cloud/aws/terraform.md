@@ -150,7 +150,7 @@
 4.3 Use public key to start EC2 instance
     Alright,  now we have the public key and the private key with us, let us create our terraform configuration file using the public key .i.e. aws_key.pub
 
-    Here is the main.tf -
+ Here is the main.tf -
     
          provider "aws" {
          region     = "us-east-2"
