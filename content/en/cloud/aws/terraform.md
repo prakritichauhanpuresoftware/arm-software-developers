@@ -1,4 +1,14 @@
-## How to deploy Graviton based EC2 instances with Terraform
+---
+title: "Deploy Graviton based EC2 instances with Terraform"
+type: docs
+weight: 1
+hide_summary: true
+description: >
+    Learn how to Deploy Graviton based EC2 instances with Terraform.
+---
+
+
+# How to deploy Graviton based EC2 instances with Terraform
    This guide will help you to Create your first AWS EC2 using terraform.
    When it comes to IAC(Infrastructure As Code) Terraform is always the first choice of DevOps although there are many alternatives available in the market such as        Ansible, Chef, Puppet, SaltStack, CloudFormation but due the fact that -
    
@@ -7,17 +17,17 @@
    3. It is widely adopted in the DevOps community
    4. Great support for a popular cloud service provider such as Google Cloud Platform, AWS.
 
-### Prerequisite
+## Prerequisite
    The only prerequisite is - You must [install Terraform](https://www.terraform.io/cli/install/apt) before jumping to AWS instance Setup.
    
-### Table of Content
+## Table of Content
    1. Setup AWS Account
    2. Generate Access keys (access key ID and secret access key)
    3. Create your first Terraform infrastructure (main.tf)
    4. Generate key-pair(public key, private key) using ssh keygen
    5. terraform commands
 
-### 1. Setup AWS Account
+## 1. Setup AWS Account
    As our aim of this article to setup an AWS EC2 instance the first step would be to create an AWS account.
    If you are a beginner and want to learn the Terraform then AWS provides you free tier - 12 months or 750 Hours/month, where you can experiment.
 
@@ -30,7 +40,7 @@
       
    ![image](https://user-images.githubusercontent.com/87687468/190132636-1312ee45-f68d-46d2-bddb-c4285816ca1a.png)
 
-   Amazon will ask for your Credit card number to complete the sign-up process, AWS will debit around 1$ so that they can verify your card details. Amazon will           refund the amount after the authorization.
+   Amazon will ask for your Credit card number to complete the sign-up process, AWS will debit around 1$ so that they can verify your card details. Amazon will            refund the amount after the authorization.
 
 ### 1.2 After Signup LogIn as ROOT user
    
@@ -43,7 +53,7 @@
    ![image](https://user-images.githubusercontent.com/87687468/190133678-18fe9da6-e7f5-4e78-aeb2-35386bbb17cd.png)
       
       
-### 2.Generate Access keys (access key ID and secret access key)
+### 2. Generate Access keys (access key ID and secret access key)
    
    Terraform installed on your Desktop/Laptop needs to communicate with AWS and to make this communication terraform needs to be authenticated.
    For authentication, we need to generate Access Keys (access key ID and secret access key). These access keys can be used for making - programmatic calls to AWS from    the AWS CLI, Tools for PowerShell, AWS SDKs, or direct AWS API calls.
@@ -60,7 +70,7 @@
 
   ![image](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png)
 
-### 3. Create your first Terraform infrastructure (main.tf)
+## 3. Create your first Terraform infrastructure (main.tf)
    Before we start writing terraform script, the first thing to learn over here is - "You need to save your configuration with .tf extension". We will start by            creating an empty main.tf file.
    
 ###   3.1 Provider
@@ -85,7 +95,7 @@
       secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
       } 
       
-###   3.2 resource - "aws_instance"
+###   3.2 Resource - "aws_instance"
    Now after defining the provider, next we are going define is resource. 
    So what do you mean by resource?
    Resource - It is something that we are going to provision/start on AWS. Now for this article, we are going to provision EC2 instance on AWS.
@@ -123,23 +133,25 @@
          }
       }
 
-### 4. Generate key-pair(public key, private key) using ssh keygen
-4.1 Generate the public key and private key
-    Before you start playing with AWS console and terraform script we need to first generate the key-pair(public key, private key) using ssh-keygen.
-    Later we are going to associate both public and private keys with AWS EC2 instances.
+## 4. Generate key-pair(public key, private key) using ssh keygen
 
- Let us generate the key pair using the following command
+### 4.1 Generate the public key and private key
+Before you start playing with AWS console and terraform script we need to first generate the key-pair(public key, private key) using ssh-keygen.
+Later we are going to associate both public and private keys with AWS EC2 instances.
+
+Let us generate the key pair using the following command:
+ 
+      $ ssh-keygen -t rsa -b 2048
        
- ![image](https://user-images.githubusercontent.com/87687468/190583662-2e3e8b2f-4ed9-488f-ab83-9e81c64020e1.png)
 
-  By default, the above command will generate the public as well as private key at location '/home//.ssh'
-  But we can override the end destination with a custom path. (I have assigned my custom path /home/ubuntu/akhand/aws/ followed my key name .i.e. aws_key )
-  Here is the output along with a screenshot my terminal-
+By default, the above command will generate the public as well as private key at location '/home//.ssh'
+But we can override the end destination with a custom path. (I have assigned my custom path /home/ubuntu/akhand/aws/ followed my key name .i.e. aws_key )
+Here is the output along with a screenshot my terminal-
       
-  ![image](https://user-images.githubusercontent.com/87687468/190586768-a500f98a-18ce-4e68-8111-9d784ed75b8a.png)
+![image](https://user-images.githubusercontent.com/87687468/190586768-a500f98a-18ce-4e68-8111-9d784ed75b8a.png)
       
-4.2 Verify the generated public key and private key
-     In the previous step, we have generated the key-pair which we are going to use for provisioning the EC2 instance. But let us take a look at the keys and how it        looks.
+### 4.2 Verify the generated public key and private key
+In the previous step, we have generated the key-pair which we are going to use for provisioning the EC2 instance. But let us take a look at the keys and how it        looks.
 
    If you remember in the previous step we have generated the keys at path /home/ubuntu/akhand/aws/ we should see two key files over there -
 
@@ -148,10 +160,10 @@
    
    We are going to use public key aws_key.pub inside the terraform file to provision/start the ec2 instance.
    
-4.3 Use public key to start EC2 instance
-    Alright,  now we have the public key and the private key with us, let us create our terraform configuration file using the public key .i.e. aws_key.pub
+### 4.3 Use public key to start EC2 instance
+Alright,  now we have the public key and the private key with us, let us create our terraform configuration file using the public key .i.e. aws_key.pub
 
- Here is the main.tf -
+Here is complete the main.tf -
     
          provider "aws" {
             region     = "us-east-2"
@@ -217,7 +229,7 @@
             key_name   = "aws_key"
             public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbvRN/gvQBhFe+dE8p3Q865T/xTKgjqTjj56p1IIKbq8SDyOybE8ia0rMPcBLAKds+wjePIYpTtRxT9UsUbZJTgF+SGSG2dC6+ohCQpi6F3xM7ryL9fy3BNCT5aPrwbR862jcOIfv     7R1xVfH8OS0WZa8DpVy5kTeutsuH5suehdngba4KhYLTzIdhM7UKJvNoUMRBaxAqIAThqH9Vt/iR1WpXgazoPw6dyPssa7ye6tUPRipmPTZukfpxcPlsqytXWlXm7R89xAY9OXkdPPVsrQdkdfhnY8aFb9XaZP8cm7EOVRdxMsA1DyWMVZOTjhBwCHfEIGoePAS3jFMqQjGWQd rahul@rahul-HP-ZBook-15-G2"
          }                  
-       
+#### NOTE : "Key_name" & "Public_key" should be replaced with original value. 
        
 ###   5. terraform commands
     
