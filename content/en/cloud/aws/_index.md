@@ -26,7 +26,7 @@ By the end of this learning path, you will be able to:
 | ---           | ---                                 |
 | How-To        | [What is Graviton](/content/en/cloud/aws/introduction.md)
 | How-To        | [deploy Graviton based EC2 instances via GUI](/content/en/cloud/aws/gui.md) |
-| How-To        | [deploy Graviton based EC2 instances via Terraform](/content/en/cloud/aws/Terraform.md) |
+| How-To        | [deploy Graviton based EC2 instances via Terraform](/content/en/cloud/aws/terraform.md) |
 
 
 ## References and Documentation
