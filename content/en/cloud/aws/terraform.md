@@ -14,7 +14,8 @@
    1. Setup AWS Account
    2. Generate Access keys (access key ID and secret access key)
    3. Create your first Terraform infrastructure (main.tf)
-   4. terraform commands
+   4. Generate key-pair(public key, private key) using ssh keygen
+   5. terraform commands
 
 ### 1. Setup AWS Account
    As our aim of this article to setup an AWS EC2 instance the first step would be to create an AWS account.
@@ -47,17 +48,17 @@
    Terraform installed on your Desktop/Laptop needs to communicate with AWS and to make this communication terraform needs to be authenticated.
    For authentication, we need to generate Access Keys (access key ID and secret access key). These access keys can be used for making - programmatic calls to AWS from    the AWS CLI, Tools for PowerShell, AWS SDKs, or direct AWS API calls.
    
-   1. Goto My Security Credentials
+1. Goto My Security Credentials
    
-   ![image](https://user-images.githubusercontent.com/87687468/190137370-87b8ca2a-0b38-4732-80fc-3ea70c72e431.png)
+  ![image](https://user-images.githubusercontent.com/87687468/190137370-87b8ca2a-0b38-4732-80fc-3ea70c72e431.png)
 
-   2. On Your Security Credentials page click on create access keys (access key ID and secret access key)
+2. On Your Security Credentials page click on create access keys (access key ID and secret access key)
    
-   ![image](https://user-images.githubusercontent.com/87687468/190137925-c725359a-cdab-468f-8195-8cce9c1be0ae.png)
+  ![image](https://user-images.githubusercontent.com/87687468/190137925-c725359a-cdab-468f-8195-8cce9c1be0ae.png)
    
-   3. Copy the Access Key ID and Secret Access Key 
+3. Copy the Access Key ID and Secret Access Key 
 
-   ![image](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png)
+  ![image](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png)
 
 ### 3. Create your first Terraform infrastructure (main.tf)
    Before we start writing terraform script, the first thing to learn over here is - "You need to save your configuration with .tf extension". We will start by            creating an empty main.tf file.
@@ -127,20 +128,20 @@
     Before you start playing with AWS console and terraform script we need to first generate the key-pair(public key, private key) using ssh-keygen.
     Later we are going to associate both public and private keys with AWS EC2 instances.
 
-    Let us generate the key pair using the following command
+ Let us generate the key pair using the following command
        
-    ![image](https://user-images.githubusercontent.com/87687468/190583662-2e3e8b2f-4ed9-488f-ab83-9e81c64020e1.png)
+ ![image](https://user-images.githubusercontent.com/87687468/190583662-2e3e8b2f-4ed9-488f-ab83-9e81c64020e1.png)
 
-    By default, the above command will generate the public as well as private key at location '/home//.ssh'
-    But we can override the end destination with a custom path. (I have assigned my custom path /home/ubuntu/akhand/aws/ followed my key name .i.e. aws_key )
-    Here is the output along with a screenshot my terminal-
+  By default, the above command will generate the public as well as private key at location '/home//.ssh'
+  But we can override the end destination with a custom path. (I have assigned my custom path /home/ubuntu/akhand/aws/ followed my key name .i.e. aws_key )
+  Here is the output along with a screenshot my terminal-
       
-    ![image](https://user-images.githubusercontent.com/87687468/190586768-a500f98a-18ce-4e68-8111-9d784ed75b8a.png)
+  ![image](https://user-images.githubusercontent.com/87687468/190586768-a500f98a-18ce-4e68-8111-9d784ed75b8a.png)
       
 4.2 Verify the generated public key and private key
      In the previous step, we have generated the key-pair which we are going to use for provisioning the EC2 instance. But let us take a look at the keys and how it        looks.
 
-     If you remember in the previous step we have generated the keys at path /home/ubuntu/akhand/aws/ we should see two key files over there -
+   If you remember in the previous step we have generated the keys at path /home/ubuntu/akhand/aws/ we should see two key files over there -
 
    1. aws_key (private key)
    2. aws_key.pub (public key)
@@ -153,71 +154,69 @@
  Here is the main.tf -
     
          provider "aws" {
-         region     = "us-east-2"
-         access_key = "AKIATQ37NXB2BYDxxxxx"
-         secret_key = "JzZKiCia2vjbq4zGGGewdbOhnacm2QIMgcBxxxxx"
-
-      }
-
-      resource "aws_instance" "ec2_example" {
-
-          ami = "ami-0b4fa084a1e7e6f5a"  
-          instance_type = "t4g.nano" 
-          key_name= "aws_key"
-          vpc_security_group_ids = [aws_security_group.main.id]
-
-        provisioner "remote-exec" {
-          inline = [
-            "touch hello.txt",
-            "echo helloworld remote provisioner >> hello.txt",
-          ]
-        }
-        provisioner "local-exec" {
-            command = "echo ${self.private_ip} >> private_ips.txt && echo ${self.public_ip} >> public_ips.txt && echo ${self.public_dns} >> public_ips.txt"
-        }
-        connection {
-            type        = "ssh"
-            host        = self.public_ip
-            user        = "ubuntu"
-            private_key = file("/home/ubuntu/akhand/aws/aws_key")
-            timeout     = "4m"
+            region     = "us-east-2"
+            access_key = "AKIATQ37NXB2BYDxxxxx"
+            secret_key = "JzZKiCia2vjbq4zGGGewdbOhnacm2QIMgcBxxxxx"
          }
-      }
 
-      resource "aws_security_group" "main" {
-        egress = [
-          {
-            cidr_blocks      = [ "0.0.0.0/0", ]
-            description      = ""
-            from_port        = 0
-            ipv6_cidr_blocks = []
-            prefix_list_ids  = []
-            protocol         = "-1"
-            security_groups  = []
-            self             = false
-            to_port          = 0
-          }
-        ]
-       ingress                = [
-         {
-           cidr_blocks      = [ "0.0.0.0/0", ]
-           description      = ""
-           from_port        = 22
-           ipv6_cidr_blocks = []
-           prefix_list_ids  = []
-           protocol         = "tcp"
-           security_groups  = []
-           self             = false
-           to_port          = 22
-        }
-        ]
-      }
+         resource "aws_instance" "ec2_example" {
+             ami = "ami-0b4fa084a1e7e6f5a"  
+            instance_type = "t4g.nano" 
+            key_name= "aws_key"
+            vpc_security_group_ids = [aws_security_group.main.id]
+
+            provisioner "remote-exec" {
+               inline = [
+               "touch hello.txt",
+               "echo helloworld remote provisioner >> hello.txt",
+               ]
+            }
+             provisioner "local-exec" {
+               command = "echo ${self.private_ip} >> private_ips.txt && echo ${self.public_ip} >> public_ips.txt && echo ${self.public_dns} >> public_ips.txt"
+               }
+            connection {
+               type        = "ssh"
+               host        = self.public_ip
+               user        = "ubuntu"
+               private_key = file("/home/ubuntu/akhand/aws/aws_key")
+               timeout     = "4m"
+            }
+         }
+
+         resource "aws_security_group" "main" {
+            egress = [
+              {
+               cidr_blocks      = [ "0.0.0.0/0", ]
+               description      = ""
+               from_port        = 0
+               ipv6_cidr_blocks = []
+               prefix_list_ids  = []
+               protocol         = "-1"
+               security_groups  = []
+               self             = false
+               to_port          = 0
+              }
+            ]
+             ingress = [
+              {
+                cidr_blocks      = [ "0.0.0.0/0", ]
+                description      = ""
+                from_port        = 22
+                ipv6_cidr_blocks = []
+                prefix_list_ids  = []
+                protocol         = "tcp"
+                security_groups  = []
+                self             = false
+                to_port          = 22
+              }
+            ]
+         }
 
 
-      resource "aws_key_pair" "deployer" {
-        key_name   = "aws_key"
-        public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbvRN/gvQBhFe+dE8p3Q865T/xTKgjqTjj56p1IIKbq8SDyOybE8ia0rMPcBLAKds+wjePIYpTtRxT9UsUbZJTgF+SGSG2dC6+ohCQpi6F3xM7ryL9fy3BNCT5aPrwbR862jcOIfv     7R1xVfH8OS0WZa8DpVy5kTeutsuH5suehdngba4KhYLTzIdhM7UKJvNoUMRBaxAqIAThqH9Vt/iR1WpXgazoPw6dyPssa7ye6tUPRipmPTZukfpxcPlsqytXWlXm7R89xAY9OXkdPPVsrQdkdfhnY8aFb9XaZP8cm7EOVRdxMsA1DyWMVZOTjhBwCHfEIGoePAS3jFMqQjGWQd rahul@rahul-HP-ZBook-15-G2"
-      }                          
+         resource "aws_key_pair" "deployer" {
+            key_name   = "aws_key"
+            public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbvRN/gvQBhFe+dE8p3Q865T/xTKgjqTjj56p1IIKbq8SDyOybE8ia0rMPcBLAKds+wjePIYpTtRxT9UsUbZJTgF+SGSG2dC6+ohCQpi6F3xM7ryL9fy3BNCT5aPrwbR862jcOIfv     7R1xVfH8OS0WZa8DpVy5kTeutsuH5suehdngba4KhYLTzIdhM7UKJvNoUMRBaxAqIAThqH9Vt/iR1WpXgazoPw6dyPssa7ye6tUPRipmPTZukfpxcPlsqytXWlXm7R89xAY9OXkdPPVsrQdkdfhnY8aFb9XaZP8cm7EOVRdxMsA1DyWMVZOTjhBwCHfEIGoePAS3jFMqQjGWQd rahul@rahul-HP-ZBook-15-G2"
+         }                  
        
        
 ###   5. terraform commands
