@@ -1,7 +1,7 @@
 ---
 title: "Deploy Graviton based EC2 instances with Terraform"
 type: docs
-weight: 1
+weight: 3
 hide_summary: true
 description: >
     Learn how to Deploy Graviton based EC2 instances with Terraform.
