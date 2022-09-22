@@ -34,6 +34,7 @@ By the end of this learning path, you will be able to:
 | Type          | Content             |
 | ---           | ---                 |
 | Documentation | [Creating an AWS account](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html) |
+| Documentation | [Launcing instance using terraform] (https://learn.hashicorp.com/tutorials/terraform/aws-build) |
 
 
 [<-- Return to Learning Path](/content/en/cloud/aws/#sections)
