@@ -1,7 +1,7 @@
 ---
 title: "What is Graviton"
 type: docs
-weight: 2
+weight: 1
 hide_summary: true
 description: >
     Graviton Introduction
