@@ -231,9 +231,9 @@ Here is complete the main.tf -
          }                  
 #### NOTE : "Key_name" & "Public_key" should be replaced with original value. 
        
-###   5. terraform commands
+###   5. Terraform commands
     
-   now we have completed all the pre-requisites for provisioning our first ec2 instance on the AWS.
+   Now we have completed all the pre-requisites for provisioning our first ec2 instance on the AWS.
     
 ###   5.1 terraform init
     
