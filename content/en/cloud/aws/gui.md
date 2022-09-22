@@ -1,8 +1,18 @@
-## How to deploy Graviton based EC2 instances via GUI
+---
+title: "Deploy Graviton based EC2 instances using GUI"
+type: docs
+weight: 2
+hide_summary: true
+description: >
+    Learn how to Deploy Graviton based EC2 instances using GUI.
+---
+
+
+# How to deploy Graviton based EC2 instances via GUI
 
 Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we have no instances running (0 Running Instances), we need to Go to > instances and select Launch Instances.
 
-   ![image](https://user-images.githubusercontent.com/87687468/189866780-e67c8a99-e5f2-445f-938c-a672cd926c4a.png)
+![image](https://user-images.githubusercontent.com/87687468/189866780-e67c8a99-e5f2-445f-938c-a672cd926c4a.png)
    
 ## Step-1
 ### Name and Tags
