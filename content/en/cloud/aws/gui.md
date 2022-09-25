@@ -91,7 +91,7 @@ Log-in to your aws account. When you Go to > EC2 dashboard. Here, In case we hav
    Now, only the current user can read this Pem file and these are permission that a Pem file expects.
    Select the Instance by checking the box of that perticular server and GO TO >> connect
    
-   ![image](https://user-images.githubusercontent.com/87687468/190094594-19ebf2dc-de3f-449d-bbb1-30089346ceb3.png)
+   ![image](https://user-images.githubusercontent.com/87687468/192154311-55889d4e-6dd2-4bc3-81a9-95cca7356e0a.png))
    
    Here in SSH Client, u can find the details to ssh that instance.
    
