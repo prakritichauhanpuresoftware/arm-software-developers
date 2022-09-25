@@ -52,20 +52,20 @@ description: >
    ![image](https://user-images.githubusercontent.com/87687468/190133678-18fe9da6-e7f5-4e78-aeb2-35386bbb17cd.png)
       
       
-### 2. Generate Access keys (access key ID and secret access key)
+## 2. Generate Access keys (access key ID and secret access key)
    
    Terraform installed on your Desktop/Laptop needs to communicate with AWS and to make this communication terraform needs to be authenticated.
    For authentication, we need to generate Access Keys (access key ID and secret access key). These access keys can be used for making - programmatic calls to AWS from    the AWS CLI, Tools for PowerShell, AWS SDKs, or direct AWS API calls.
    
-1. Goto My Security Credentials
+### 2.1 Goto My Security Credentials
    
   ![image](https://user-images.githubusercontent.com/87687468/190137370-87b8ca2a-0b38-4732-80fc-3ea70c72e431.png)
 
-2. On Your Security Credentials page click on create access keys (access key ID and secret access key)
+### 2.2 On Your Security Credentials page click on create access keys (access key ID and secret access key)
    
   ![image](https://user-images.githubusercontent.com/87687468/190137925-c725359a-cdab-468f-8195-8cce9c1be0ae.png)
    
-3. Copy the Access Key ID and Secret Access Key 
+### 2.3 Copy the Access Key ID and Secret Access Key 
 
   ![image](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png)
 
@@ -154,14 +154,13 @@ Alright, now we have the public key and the private key with us, let us create o
    Here is the aws_instance configuration -
    
       resource "aws_instance" "ec2_example" {
-      ami = "ami-0767046d1677be5a0"  
-      instance_type = "t2.micro" 
-      tags = {
-         Name = "Terraform EC2"
-         }
+      ami = "ami-02a92e06fd643c11b"  
+      instance_type = "t4g.nano" 
+      key_name= "aws_key"
+      vpc_security_group_ids = [aws_security_group.main.id]
       }
 
-#### Here is complete the main.tf -
+#### Here is our complete main.tf -
     
          provider "aws" {
             region     = "us-east-2"
@@ -170,7 +169,7 @@ Alright, now we have the public key and the private key with us, let us create o
          }
 
          resource "aws_instance" "ec2_example" {
-             ami = "ami-0b4fa084a1e7e6f5a"  
+            ami = "ami-02a92e06fd643c11b"  
             instance_type = "t4g.nano" 
             key_name= "aws_key"
             vpc_security_group_ids = [aws_security_group.main.id]
