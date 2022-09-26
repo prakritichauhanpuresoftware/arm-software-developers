@@ -85,7 +85,7 @@ By default, the above command will generate the public as well as private key at
 But we can override the end destination with a custom path. (I have assigned my custom path /home/ubuntu/aws/ followed my key name .i.e. aws_key )
 Here is the output along with a screenshot my terminal-
       
-![image](https://user-images.githubusercontent.com/87687468/190586768-a500f98a-18ce-4e68-8111-9d784ed75b8a.png)
+![image](https://user-images.githubusercontent.com/87687468/192259698-8219d63c-e28b-41e2-a67c-7f77dff20e9a.png)
       
 ### 3.2 Verify the generated public key and private key
 In the previous step, we have generated the key-pair which we are going to use for provisioning the EC2 instance. But let us take a look at the keys and how it        looks.
