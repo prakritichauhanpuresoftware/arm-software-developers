@@ -82,7 +82,7 @@ Let us generate the key pair using the following command:
        
 
 By default, the above command will generate the public as well as private key at location '/home//.ssh'
-But we can override the end destination with a custom path. (I have assigned my custom path /home/ubuntu/akhand/aws/ followed my key name .i.e. aws_key )
+But we can override the end destination with a custom path. (I have assigned my custom path /home/ubuntu/aws/ followed my key name .i.e. aws_key )
 Here is the output along with a screenshot my terminal-
       
 ![image](https://user-images.githubusercontent.com/87687468/190586768-a500f98a-18ce-4e68-8111-9d784ed75b8a.png)
@@ -90,7 +90,7 @@ Here is the output along with a screenshot my terminal-
 ### 3.2 Verify the generated public key and private key
 In the previous step, we have generated the key-pair which we are going to use for provisioning the EC2 instance. But let us take a look at the keys and how it        looks.
 
-   If you remember in the previous step we have generated the keys at path /home/ubuntu/akhand/aws/ we should see two key files over there -
+   If you remember in the previous step we have generated the keys at path /home/ubuntu/aws/ we should see two key files over there -
 
    1. aws_key (private key)
    2. aws_key.pub (public key)
@@ -187,7 +187,7 @@ Alright, now we have the public key and the private key with us, let us create o
                type        = "ssh"
                host        = self.public_ip
                user        = "ubuntu"
-               private_key = file("/home/ubuntu/akhand/aws/aws_key")
+               private_key = file("/home/ubuntu/aws/aws_key")
                timeout     = "4m"
             }
          }
