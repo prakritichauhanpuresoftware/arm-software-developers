@@ -129,7 +129,7 @@ Alright, now we have the public key and the private key with us, let us create o
    Resource - It is something that we are going to provision/start on AWS. Now for this article, we are going to provision EC2 instance on AWS.
    But before we provision the EC2 instance, we need to gather few points -
    1. ami = you need to tell Terraform which AMI(Amazon Machine Image) you are going to use. Is it going to be Ubuntu, CentOS or something else
-   2. instance_type = Also based on your need you have to choose the instance_type and it can be t2.nano, t2.micro, t2. small etc.
+   2. instance_type = Also based on your need you have to choose the instance_type and it can be t4g.nano, t4g.micro, t4g.small etc.
 
 ### 4.3 How to find ami(Amazon Machine Image)
    
@@ -150,7 +150,7 @@ Alright, now we have the public key and the private key with us, let us create o
    
    We can find the correct ìnstance_type` by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
 
-   Since I am looking for a very basic instance_type not production level instance, so I choose t2.micro
+   Since I am looking for a very basic instance_type not production level instance, so I choose t4g.nano
    Here is the aws_instance configuration -
    
       resource "aws_instance" "ec2_example" {
@@ -258,7 +258,7 @@ Alright, now we have the public key and the private key with us, let us create o
    
    ![image](https://user-images.githubusercontent.com/87687468/190377240-b37c607f-38b3-415d-836e-ae84abfd627b.png)
 
-   As you can see the log output has created t2.micro instance.
+   As you can see the log output has created t4g.nano instance.
    
 ### 5.4 Verify the EC2 setup
    Let's verify the setup by going back to AWS console.
