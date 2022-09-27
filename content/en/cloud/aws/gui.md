@@ -20,16 +20,18 @@ Log in to you AWS account and open the EC2 Dashboard. To launch an instance, sel
    ![image](https://user-images.githubusercontent.com/87687468/189888083-b5b241cf-ed8f-4cb6-b414-3f7d478c9dc8.png)
 
 ## Choose an Amazon Machine Image (AMI)
-   Go to > Ubuntu Server 22.04 LTS (HVM), SSD Volume Type, ami-0ff596d41505819fd, from Ubuntu.  
-   Select and use > 64-bit (Arm) version.
+   here we can select the ubuntu AMI by selecting Ubuntu from given list.
    
-   ![image](https://user-images.githubusercontent.com/87687468/189873264-568cb285-bf1f-40bc-9a84-c94407b65d0d.png)
+   ![image](https://user-images.githubusercontent.com/87687468/192594550-95c51ac9-d1cd-4f0d-98f2-a1fce1a78b2d.png)
+
+   Also select "64-bit (Arm)" from Architecture drop down
+   
+   ![image](https://user-images.githubusercontent.com/87687468/192595418-c96ad1e5-8a74-43f8-83c7-d5c19f14ff4a.png)
 
 ## Choose an Instance Type
-   Here we can choose the any instance type from various types availabe in drop down list as per our requirment. For Practice, Use a t4g.micro instance (low to            moderate). Go to> Next
+   Here we can choose the any instance type from various types availabe in drop down list as per our requirment. For Practice, Use a t4g.nano instance (low to            moderate).
    
-   ![image](https://user-images.githubusercontent.com/87687468/189874028-ad3955ec-817d-4cac-a3f2-82335a256500.png)
- 
+   ![image](https://user-images.githubusercontent.com/87687468/192596029-21b7dcc2-917c-41d0-bda2-3763584f7f00.png)
  
 ## SSH Key pair
    We can use a key pair to securely connect to our instance. Either we can choose from existing key pair or we can create a new one. It is generally preferred that      instead of using the same key pair for all servers, you should create a new one for certain groups of servers. Though, you might want to keep one key pair per          account where you need to have only 3-4 servers per account which might be the case for small webapps.
