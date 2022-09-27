@@ -9,9 +9,8 @@ description: >
 
 
 ## What is Graviton
-"Graviton is an Arm based process designed by Annapurna labs for AWS. More information can be found here"
-The "here" text, should be a link to this page:
-https://aws.amazon.com/pm/ec2-graviton/
+Graviton is an Arm based processor designed by Annapurna labs for AWS. More information can be found [here](https://aws.amazon.com/pm/ec2-graviton/).
+
 
 
 
