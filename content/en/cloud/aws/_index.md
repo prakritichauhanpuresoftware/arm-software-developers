@@ -4,21 +4,20 @@ type: docs
 hide_summary: true
 weight: 2
 description: >
-    Learning path for software developers about How to deploy Graviton based EC2 instances via GUI and Terraform. 
+    Learning path for software developers about how to deploy Graviton based EC2 instances via GUI and Terraform. 
 ---
 
 ## Learning Objectives 
 
 By the end of this learning path, you will be able to:
 
-* deploy Graviton based EC2 instances via GUI.
-* deploy Graviton based EC2 instances via terraform.
+* Deploy Graviton based EC2 instances via GUI.
+* Deploy Graviton based EC2 instances via terraform.
 
 ## Pre-requisites
 
 * An Amazon Web Services(AWS) account
 * Terraform
-* 
 
 ## Sections
 
