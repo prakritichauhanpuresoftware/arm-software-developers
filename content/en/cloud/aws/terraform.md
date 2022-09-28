@@ -74,7 +74,7 @@ description: >
 
 ### 3.1 Generate the public key and private key
 Before you start playing with AWS console and terraform script we need to first generate the key-pair(public key, private key) using ssh-keygen.
-Later we are going to associate both public and private keys with AWS EC2 instances.
+later we are going to associate both public and private keys with AWS EC2 instances.
 
 Let us generate the key pair using the following command:
  
@@ -95,11 +95,11 @@ In the previous step, we have generated the key-pair which we are going to use f
    1. aws_key (private key)
    2. aws_key.pub (public key)
    
-We are going to use public key aws_key.pub inside the terraform file to provision/start the ec2 instance.
-Alright, now we have the public key and the private key with us, let us create our terraform configuration file using the public key .i.e. aws_key.pub
+We are going to use public key **aws_key.pub** inside the terraform file to provision/start the ec2 instance.
+Alright, now we have the public key and the private key with us, let us create our terraform configuration file using the public key i.e. aws_key.pub
 
 ## 4. Create your first Terraform infrastructure (main.tf)
-   Before we start writing terraform script, the first thing to learn over here is - "You need to save your configuration with .tf extension". We will start by            creating an empty main.tf file.
+   Before we start writing terraform script, the first thing to learn over here is - You need to save your configuration with **.tf** extension. We will start by            creating an empty main.tf file.
    
 ### 4.1 Provider
    The first line of code in which we are going to write is provider. We need to tell terraform which cloud provider we are going to connect .e.g - AWS, Google, or        Azure
@@ -128,16 +128,16 @@ Alright, now we have the public key and the private key with us, let us create o
    So what do you mean by resource?
    Resource - It is something that we are going to provision/start on AWS. Now for this article, we are going to provision EC2 instance on AWS.
    But before we provision the EC2 instance, we need to gather few points -
-   1. ami = you need to tell Terraform which AMI(Amazon Machine Image) you are going to use. Is it going to be Ubuntu, CentOS or something else
-   2. instance_type = Also based on your need you have to choose the instance_type and it can be t4g.nano, t4g.micro, t4g.small etc.
+   1. **ami** = you need to tell Terraform which AMI(Amazon Machine Image) you are going to use. Is it going to be Ubuntu, CentOS or something else
+   2. **instance_type** = Also based on your need you have to choose the instance_type and it can be t4g.nano, t4g.micro, t4g.small etc.
 
 ### 4.3 How to find ami(Amazon Machine Image)
    
-   1. To find the correct ami you need to Goto: EC2
+   1. To find the correct ami you need to Goto >> **EC2**
    
    ![image](https://user-images.githubusercontent.com/87687468/190343196-051e752a-a61d-4a6b-80d6-25369f41e97c.png)
    
-   2. In the left Navigation you will find Images -> AMIs
+   2. In the left Navigation you will find **Images -> AMIs**
    
    ![image](https://user-images.githubusercontent.com/87687468/190343512-54fb7a3c-d048-4c23-bb66-0a0ebfb0fa80.png)
    
@@ -148,9 +148,9 @@ Alright, now we have the public key and the private key with us, let us create o
 
 ### 4.4 How to find correct instance_type
    
-   We can find the correct ìnstance_type` by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
+   We can find the correct ìnstance_type by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
 
-   Since I am looking for a very basic instance_type not production level instance, so I choose t4g.nano
+   Since I am looking for a very basic instance_type not production level instance, so I choose **t4g.nano**
    Here is the aws_instance configuration -
    
       resource "aws_instance" "ec2_example" {
@@ -261,28 +261,28 @@ Alright, now we have the public key and the private key with us, let us create o
    As you can see the log output has created t4g.nano instance.
    
 ### 5.4 Verify the EC2 setup
-   Let's verify the setup by going back to AWS console.
+    Let's verify the setup by going back to AWS console.
 
-   Goto -> EC2 -> instances you should see 1 instance running.   
+    Goto **EC2 -> instances** you should see the instance running.   
    
-   ![image](https://user-images.githubusercontent.com/87687468/192154191-7c0c97c6-4119-4395-bd8a-2873835e2f73.png)
+    ![image](https://user-images.githubusercontent.com/87687468/192154191-7c0c97c6-4119-4395-bd8a-2873835e2f73.png)
 
    You can also see the Tag name - Terraform EC2 which we mentioned in the terraform script.
    
 ### 5.5 Use private key 'aws_key' to SSH into EC2 instance
-In the previous step, we have started the EC2 instance, now we need to connect to EC2 instance using the private key.
+    In the previous step, we have started the EC2 instance, now we need to connect to EC2 instance using the private key.
 
-You can find the connect command from the aws console -
+    You can find the connect command from the aws console -
 
-![image](https://user-images.githubusercontent.com/87687468/190621116-0e9fb285-960f-437d-bfc0-77352349372c.png)   
+    ![image](https://user-images.githubusercontent.com/87687468/190621116-0e9fb285-960f-437d-bfc0-77352349372c.png)   
    
 ### 5.6 terraform destroy
    
-   Now we have seen how to write your terraform script and how to provision your EC2 instance.
+    Now we have seen how to write your terraform script and how to provision your EC2 instance.
 
-   Let see how to remove or delete everything from AWS.
+    Let see how to remove or delete everything from AWS.
 
-   We are going to use the command -
+    We are going to use the command -
    
    ![image](https://user-images.githubusercontent.com/87687468/190385964-c54095c3-88be-4eae-a131-0fb41cad24cb.png)
 
