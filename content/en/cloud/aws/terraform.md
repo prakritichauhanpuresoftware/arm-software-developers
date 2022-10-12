@@ -17,7 +17,7 @@ description: >
       
 ## 1. Generate Access keys (access key ID and secret access key)
    
-   Terraform installed on your Desktop/Laptop needs to communicate with AWS and to make this communication terraform needs to be authenticated.
+   Terraform installed on your Desktop/Laptop needs to communicate with AWS and to make this communication Terraform needs to be authenticated.
    For authentication, we need to generate Access Keys (access key ID and secret access key). These access keys can be used for making - programmatic calls to AWS from    the AWS CLI, Tools for PowerShell, AWS SDKs, or direct AWS API calls.
    
 ### 1.1 Goto My Security Credentials
@@ -36,7 +36,7 @@ description: >
 ## 2. Generate key-pair(public key, private key) using ssh keygen
 
 ### 2.1 Generate the public key and private key
-Before you start playing with AWS console and terraform script we need to first generate the key-pair(public key, private key) using ssh-keygen.
+Before you start playing with AWS console and Terraform script we need to first generate the key-pair(public key, private key) using ssh-keygen.
 later we are going to associate both public and private keys with AWS EC2 instances.
 
 Let us generate the key pair using the following command:
@@ -58,14 +58,14 @@ In the previous step, we have generated the key-pair which we are going to use f
    1. aws_key (private key)
    2. aws_key.pub (public key)
    
-We are going to use public key **aws_key.pub** inside the terraform file to provision/start the ec2 instance.
-Alright, now we have the public key and the private key with us, let us create our terraform configuration file using the public key i.e. aws_key.pub
+We are going to use public key **aws_key.pub** inside the Terraform file to provision/start the ec2 instance.
+Alright, now we have the public key and the private key with us, let us create our Terraform configuration file using the public key i.e. aws_key.pub
 
 ## 3. Create your first Terraform infrastructure (main.tf)
-   Before we start writing terraform script, the first thing to learn over here is - You need to save your configuration with **.tf** extension. We will start by            creating an empty main.tf file.
+   Before we start writing Terraform script, the first thing to learn over here is - You need to save your configuration with **.tf** extension. We will start by            creating an empty main.tf file.
    
 ### 3.1 Provider
-   The first line of code in which we are going to write is provider. We need to tell terraform which cloud provider we are going to connect .e.g - AWS, Google, or        Azure
+   The first line of code in which we are going to write is provider. We need to tell Terraform which cloud provider we are going to connect .e.g - AWS, Google, or        Azure
 
    As this article is focused on AWS, so we are going to mention AWS as our provider.
 
@@ -203,8 +203,8 @@ Alright, now we have the public key and the private key with us, let us create o
     
    ![image](https://user-images.githubusercontent.com/87687468/190346590-e5be6def-5d6b-470a-a0cb-1057a1334cd7.png)
       
-   The terraform init command is responsible for downloading all the dependencies which are required for the provider AWS.
-   Once you issue the terraform init command it will download all the provider's dependencies on your local machine.
+   The Terraform init command is responsible for downloading all the dependencies which are required for the provider AWS.
+   Once you issue the Terraform init command it will download all the provider's dependencies on your local machine.
 
 ### 4.2 terraform plan
    
@@ -230,7 +230,7 @@ Alright, now we have the public key and the private key with us, let us create o
    
     ![image](https://user-images.githubusercontent.com/87687468/192154191-7c0c97c6-4119-4395-bd8a-2873835e2f73.png)
 
-   You can also see the Tag name - Terraform EC2 which we mentioned in the terraform script.
+   You can also see the Tag name - Terraform EC2 which we mentioned in the Terraform script.
    
 ### 4.5 Use private key 'aws_key' to SSH into EC2 instance
     In the previous step, we have started the EC2 instance, now we need to connect to EC2 instance using the private key.
@@ -241,7 +241,7 @@ Alright, now we have the public key and the private key with us, let us create o
    
 ### 4.6 terraform destroy
    
-    Now we have seen how to write your terraform script and how to provision your EC2 instance.
+    Now we have seen how to write your Terraform script and how to provision your EC2 instance.
 
     Let see how to remove or delete everything from AWS.
 
