@@ -10,7 +10,7 @@ description: >
 
 # How to deploy Graviton based EC2 instances via GUI
 
-Log in to you AWS account and open the EC2 Dashboard. To launch an instance, select Launch instance from the Dashboard.
+Log in to your AWS account and open the EC2 Dashboard. To launch an instance, select Launch instance from the Dashboard.
 
 ![image](https://user-images.githubusercontent.com/87687468/189866780-e67c8a99-e5f2-445f-938c-a672cd926c4a.png)
    
@@ -34,7 +34,7 @@ Log in to you AWS account and open the EC2 Dashboard. To launch an instance, sel
    ![image](https://user-images.githubusercontent.com/87687468/192596029-21b7dcc2-917c-41d0-bda2-3763584f7f00.png)
  
 ## SSH Key pair
-   We can use a key pair to securely connect to our instance. We can choose from an existing key pair, or create a new one. It is generally preferred that instead of using the same key pair for all servers, you should create a new one for certain groups of servers.
+   We can use a key pair to securely connect to our instance. We can choose from an existing key pair, or create a new one. It is generally preferred that instead of using the same key pair for all instances, you should create a new one for different groups of instances.
    
    ![image](https://user-images.githubusercontent.com/87687468/189890580-0b647d1e-baad-4597-95ad-7fcad81e9324.png)
 
@@ -42,7 +42,7 @@ Log in to you AWS account and open the EC2 Dashboard. To launch an instance, sel
 
    ![image](https://user-images.githubusercontent.com/87687468/189891219-ac02d5df-d247-4adb-8e3d-03c0212b9356.png)
 
-   Download the newly crated Key Pair. Once it is downloaded, we can select it from the drop down list.
+   Download the newly created Key Pair. Once it is downloaded, we can select it from the drop down list.
    
    ![image](https://user-images.githubusercontent.com/87687468/189892157-580783ad-f387-4f6e-83f6-793661078bbc.png)
 
@@ -79,17 +79,15 @@ Log in to you AWS account and open the EC2 Dashboard. To launch an instance, sel
    $ chmod 400 demoserver.pem
    ```
    
-   Now, only the current user can read this Pem file and these are permission that a Pem file expects.
-   Select the Instance by checking the box of that perticular server and GO TO >> connect
+   Now, only the owner of the Pem file can read it. In fact, these are permissions that a Pem file expects. Select the Instance by checking the box of the instance you want to connect to and GO TO » connect.
    
    ![image](https://user-images.githubusercontent.com/87687468/192154311-55889d4e-6dd2-4bc3-81a9-95cca7356e0a.png))
    
-   Here in SSH Client, u can find the details to ssh that instance.
+   Here in SSH Client, you will see instructions that explain how to SSH into the instance.
    
    ![image](https://user-images.githubusercontent.com/87687468/190095052-41851f3d-61db-486f-9c00-2f504587bdcc.png)
    
-   Since, I am in the same directory where the Pem file is present. I do not need the full path for the pem file.
-   Use following command to ssh an instance:
+   If in your terminal, you are in the same directory where the Pem file is present. you will not need the full path for the pem file. Use following command to ssh an instance:
    
    ```
    ssh -i "demoserver.pem" ubuntu@<Public IP/DNS address>
