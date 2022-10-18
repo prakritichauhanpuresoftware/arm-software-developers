@@ -81,7 +81,7 @@ Log in to your AWS account and open the EC2 Dashboard. To launch an instance, se
    
    Now, only the owner of the Pem file can read it. In fact, these are permissions that a Pem file expects. Select the Instance by checking the box of the instance you want to connect to and GO TO » connect.
    
-   ![image](https://user-images.githubusercontent.com/87687468/192154311-55889d4e-6dd2-4bc3-81a9-95cca7356e0a.png))
+   ![image](https://user-images.githubusercontent.com/87687468/192154311-55889d4e-6dd2-4bc3-81a9-95cca7356e0a.png)
    
    Here in SSH Client, you will see instructions that explain how to SSH into the instance.
    
