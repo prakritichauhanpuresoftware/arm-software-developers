@@ -18,8 +18,7 @@ description: >
       
 ## Generate Access keys (access key ID and secret access key)
    
-   The installation of Terraform on your Desktop/Laptop needs to communicate with AWS. Thus Terraform needs to be able to authenticate with AWS.
-   For authentication, we need to generate Access Keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to    AWS via the AWS CLI.
+   The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS. For authentication, we need to generate access keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to AWS via the AWS CLI.
 
    
 ### Go to My Security Credentials
@@ -38,35 +37,35 @@ description: >
 ## Generate key-pair(public key, private key) using ssh keygen
 
 ### Generate the public key and private key
-Before you use Terraform, we need to first generate the key-pair(public key, private key) using ssh-keygen.
-later we are going to associate both public and private keys with AWS EC2 instances.
+Before you use Terraform, we need to first generate the key-pair(public key and private key) using ssh-keygen. 
+Later, we are going to associate both public and private keys with AWS EC2 instances.
 
-Generate the key pair using the following command:
+Generate the key-pair using the following command:
  
       $ ssh-keygen -t rsa -b 2048
        
 By default, the above command will generate the public as well as private key at location **/home/.ssh**
-But we can override the end destination with a custom path. (Below we use custom path /home/ubuntu/aws/ with a key name of aws_keys. Below is the output)
-Here is the output along with a screenshot my terminal-
+But we can override the end destination with a custom path. (Below we use custom path /home/ubuntu/aws/ with a key name of aws_keys)
+Here is the output along with a screenshot of my terminal -
       
 ![image](https://user-images.githubusercontent.com/87687468/192259698-8219d63c-e28b-41e2-a67c-7f77dff20e9a.png)
       
 ### Verify the generated public key and private key
-In the previous step, we have generated the key-pair which we are going to use for provisioning the EC2 instance. But let us take a look at the keys and how it        looks.
+In the previous step, we have generated the key-pair that we are going to use for provisioning the EC2 instance. But let us take a look at the keys and how they look.
 
-   If you remember in the previous step we have generated the keys at path /home/ubuntu/aws/ we should see two key files over there -
+If you remember in the previous step we have generated the keys at path /home/ubuntu/aws/ we should see two key files over there -
 
    1. aws_key (private key)
    2. aws_key.pub (public key)
    
-We are going to use public key **aws_key.pub** inside the Terraform file to provision/start the ec2 instance.
-Alright, now we have the public key and the private key with us, let us create our Terraform configuration file using the public key i.e. aws_key.pub
+We are going to use the public key aws_key.pub inside the Terraform file to provision/start the EC2 instance. 
+Alright, now we have the public key and the private key with us. Let us create our Terraform configuration file using the public key, i.e. aws_key.pub.
 
 ## Create your first Terraform infrastructure (main.tf)
-   Before we start writing Terraform script, the first thing to learn over here is - You need to save your configuration with **.tf** extension. We will start by            creating an empty main.tf file.
+   Before we start writing Terraform script, the first thing to learn over here is - You need to save your configuration with **.tf** extension. We will start by     creating an empty main.tf file.
    
 ### Provider
-   The first line of code in which we are going to write is provider. We need to tell Terraform which cloud provider we are going to connect .e.g - AWS, Google, or        Azure
+   The first line of code that we are going to write is provider. We need to tell Terraform which cloud provider we are going to connect to e.g - AWS, Google, or Azure
 
    As this article is focused on AWS, so we are going to mention AWS as our provider.
 
@@ -88,10 +87,11 @@ Alright, now we have the public key and the private key with us, let us create o
       } 
       
 ### Resource - "aws_instance"
-   Now after defining the provider, next we are going define is resource. 
-   So what do you mean by resource?
-   Resource - It is something that we are going to provision/start on AWS. Now for this article, we are going to provision EC2 instance on AWS.
-   But before we provision the EC2 instance, we need to gather few points -
+   Next, after defining the provider, we are going to define the resource. 
+   So what do you mean by resource?
+   Resource - It is something that we are going to provision/start on AWS. For this article, we are going to provision an EC2 instance on AWS.
+   But before we provision the EC2 instance, we need to gather a few points -
+   
    1. **ami** = you need to tell Terraform which AMI(Amazon Machine Image) you are going to use. Is it going to be Ubuntu, CentOS or something else
    2. **instance_type** = Also based on your need you have to choose the instance_type and it can be t4g.nano, t4g.micro, t4g.small etc.
 
@@ -204,39 +204,38 @@ Alright, now we have the public key and the private key with us, let us create o
     
    ![image](https://user-images.githubusercontent.com/87687468/190346590-e5be6def-5d6b-470a-a0cb-1057a1334cd7.png)
       
-   The Terraform init command is responsible for downloading all the dependencies which are required for the provider AWS.
-   Once you issue the Terraform init command it will download all the provider's dependencies on your local machine.
+   The **terraform init** command is responsible for downloading all the dependencies which are required for the provider AWS.
+   Once you issue the **terraform init** command it will download all the provider's dependencies on your local machine.
 
 ### terraform plan
    
-   This command will help you to understand how many resources you are gonna add or delete.
+   This command will help you understand how many resources you are going to add or delete.
 
    Here is the command -
 
    ![image](https://user-images.githubusercontent.com/87687468/190347066-fa9cd09e-b3f0-44f1-9621-043bbc4b972d.png)
    
 ### terraform apply
-   This command will do some real stuff on AWS. Once you will issue this command, it will be going to connect to AWS and then finally going to provision AWS instance.
-
+  This command will do some real stuff on AWS. Once you issue this command, it will connect to AWS and then finally provision an AWS instance.
    Here is the command -   
    
    ![image](https://user-images.githubusercontent.com/87687468/190377240-b37c607f-38b3-415d-836e-ae84abfd627b.png)
 
-   As you can see the log output has created t4g.nano instance.
+   As you can see the log output has created a t4g.nano instance.
    
 ### Verify the EC2 setup
-   Let's verify the setup by going back to AWS console.
+   Let's verify the setup by going back to the AWS console.
 
    Goto **EC2 -> instances** you should see the instance running.   
    
    ![image](https://user-images.githubusercontent.com/87687468/192154191-7c0c97c6-4119-4395-bd8a-2873835e2f73.png)
 
-   You can also see the Tag name - Terraform EC2 which we mentioned in the Terraform script.
+   You can also see the tag name - Terraform EC2, which we mentioned in the Terraform script.
    
 ### Use private key 'aws_key' to SSH into EC2 instance
-   In the previous step, we have started the EC2 instance, now we need to connect to EC2 instance using the private key.
+   In the previous step, we have started the EC2 instance. Now we need to connect to the EC2 instance using the private key.
 
-   You can find the connect command from the aws console -
+   You can find the connect command from the aws console-
 
    ![image](https://user-images.githubusercontent.com/87687468/190621116-0e9fb285-960f-437d-bfc0-77352349372c.png)   
    
@@ -246,7 +245,7 @@ Alright, now we have the public key and the private key with us, let us create o
 
    Let see how to remove or delete everything from AWS.
 
-   We are going to use the command -
+   Use the command -
    
    ![image](https://user-images.githubusercontent.com/87687468/190385964-c54095c3-88be-4eae-a131-0fb41cad24cb.png)
 
