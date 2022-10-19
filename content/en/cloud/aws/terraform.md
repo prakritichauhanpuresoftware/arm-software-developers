@@ -225,11 +225,11 @@ Alright, now we have the public key and the private key with us, let us create o
    As you can see the log output has created t4g.nano instance.
    
 ### Verify the EC2 setup
-    Let's verify the setup by going back to AWS console.
+   Let's verify the setup by going back to AWS console.
 
-    Goto **EC2 -> instances** you should see the instance running.   
+   Goto **EC2 -> instances** you should see the instance running.   
    
-    ![image](https://user-images.githubusercontent.com/87687468/192154191-7c0c97c6-4119-4395-bd8a-2873835e2f73.png)
+   ![image](https://user-images.githubusercontent.com/87687468/192154191-7c0c97c6-4119-4395-bd8a-2873835e2f73.png)
 
    You can also see the Tag name - Terraform EC2 which we mentioned in the Terraform script.
    
