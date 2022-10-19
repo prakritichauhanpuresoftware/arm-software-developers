@@ -234,19 +234,19 @@ Alright, now we have the public key and the private key with us, let us create o
    You can also see the Tag name - Terraform EC2 which we mentioned in the Terraform script.
    
 ### Use private key 'aws_key' to SSH into EC2 instance
-    In the previous step, we have started the EC2 instance, now we need to connect to EC2 instance using the private key.
+   In the previous step, we have started the EC2 instance, now we need to connect to EC2 instance using the private key.
 
-    You can find the connect command from the aws console -
+   You can find the connect command from the aws console -
 
-    ![image](https://user-images.githubusercontent.com/87687468/190621116-0e9fb285-960f-437d-bfc0-77352349372c.png)   
+   ![image](https://user-images.githubusercontent.com/87687468/190621116-0e9fb285-960f-437d-bfc0-77352349372c.png)   
    
 ### terraform destroy
    
-    Now we have seen how to write your Terraform script and how to provision your EC2 instance.
+   Now we have seen how to write your Terraform script and how to provision your EC2 instance.
 
-    Let see how to remove or delete everything from AWS.
+   Let see how to remove or delete everything from AWS.
 
-    We are going to use the command -
+   We are going to use the command -
    
    ![image](https://user-images.githubusercontent.com/87687468/190385964-c54095c3-88be-4eae-a131-0fb41cad24cb.png)
 
