@@ -7,22 +7,20 @@ description: >
     Learn how to deploy Graviton based EC2 instances using GUI.
 ---
 
-
 # How to deploy Graviton based EC2 instances via GUI
-
 Log in to your AWS account and open the EC2 Dashboard. To launch an instance, select Launch instance from the Dashboard.
 
 ![image](https://user-images.githubusercontent.com/87687468/189866780-e67c8a99-e5f2-445f-938c-a672cd926c4a.png)
    
 ## Name and Tags
-   Name the instance.
+Name the instance.
     
-   ![image](https://user-images.githubusercontent.com/87687468/192811901-40232129-2405-4a33-803c-1a9e40934b44.png)
+![image](https://user-images.githubusercontent.com/87687468/192811901-40232129-2405-4a33-803c-1a9e40934b44.png)
 
 ## Choose an Amazon Machine Image (AMI)
-   Here we can select an Ubuntu AMI and change the architecture to Arm.
+Here we can select an Ubuntu AMI and change the architecture to Arm.
    
-   ![image](https://user-images.githubusercontent.com/87687468/192594550-95c51ac9-d1cd-4f0d-98f2-a1fce1a78b2d.png)
+![image](https://user-images.githubusercontent.com/87687468/192594550-95c51ac9-d1cd-4f0d-98f2-a1fce1a78b2d.png)
 
    Also select "64-bit (Arm)" from Architecture drop down
    
