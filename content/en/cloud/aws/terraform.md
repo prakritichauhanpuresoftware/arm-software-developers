@@ -187,19 +187,14 @@ Run `terraform plan` to create an execution plan.
 ```
   terraform plan
 ```
-![image](https://user-images.githubusercontent.com/87687468/190347066-fa9cd09e-b3f0-44f1-9621-043bbc4b972d.png)
-
 **NOTE:** The **terraform plan** command is optional. We can directly run **terraform apply** command. But it is always better to check the resources about to be created.
 
 ### Apply a Terraform execution plan
 Run `terraform apply` to apply the execution plan to your cloud infrastructure. Below command creates all required infrastructure.
 ```
-  terraform apply main.tfplan
-```   
-   
-![image](https://user-images.githubusercontent.com/87687468/190377240-b37c607f-38b3-415d-836e-ae84abfd627b.png)
-
-As you can see the log output has created a t4g.nano instance.
+  terraform apply
+```      
+![image](https://user-images.githubusercontent.com/87687468/199248572-9966e305-f502-4444-943d-7eb0ba0ee9ae.png)
    
 ### Verify the EC2 setup
 Let's verify the setup by going back to the AWS console.
