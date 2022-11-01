@@ -84,3 +84,4 @@ If in your terminal, you are in the same directory where the Pem file is present
 ```
 ssh -i "demoserver.pem" ubuntu@<Public IP/DNS address>
 ```
+[<-- Return to Learning Path](/content/en/cloud/azure/#sections)
