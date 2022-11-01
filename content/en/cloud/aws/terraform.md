@@ -217,6 +217,6 @@ Run `terraform destroy` to delete all resources created.
 ```
 It will remove all resource groups, virtual networks, and all other resources created through Terraform.
    
-![image](https://user-images.githubusercontent.com/87687468/190385964-c54095c3-88be-4eae-a131-0fb41cad24cb.png)
+![image](https://user-images.githubusercontent.com/87687468/199249004-71ba8ba6-d67e-49ae-bb8d-865b5c16d54f.png)
 
 [<-- Return to Learning Path](/content/en/cloud/azure/#sections)
