@@ -35,29 +35,21 @@ The installation of Terraform on your desktop or laptop needs to communicate wit
 ## Generate key-pair(public key, private key) using ssh keygen
 
 ### Generate the public key and private key
-Before you use Terraform, we need to first generate the key-pair(public key and private key) using ssh-keygen. 
-Later, we are going to associate both public and private keys with AWS EC2 instances.
+Before using Terraform, we need to first generate the key-pair(public key, private key) using ssh-keygen. Then we are going to associate both public and private keys with AWS EC2 instances.
 
 Generate the key-pair using the following command:
  
       $ ssh-keygen -t rsa -b 2048
        
-By default, the above command will generate the public as well as private key at location **/home/.ssh**
-But we can override the end destination with a custom path. (Below we use custom path /home/ubuntu/aws/ with a key name of aws_keys)
-Here is the output along with a screenshot of my terminal -
+By default, the above command will generate the public as well as private key at location **/home/.ssh**. But we can override the end destination with a custom path (Eg: /home/ubuntu/aws/ followed by key name aws_keys).
+Output when a key pair is generated:
       
 ![image](https://user-images.githubusercontent.com/87687468/192259698-8219d63c-e28b-41e2-a67c-7f77dff20e9a.png)
       
-### Verify the generated public key and private key
-In the previous step, we have generated the key-pair that we are going to use for provisioning the EC2 instance. But let us take a look at the keys and how they look.
-If you remember in the previous step we have generated the keys at path /home/ubuntu/aws/ we should see two key files over there -
-1. aws_key (private key)
-2. aws_key.pub (public key)   
-We are going to use the public key aws_key.pub inside the Terraform file to provision/start the EC2 instance. 
-Alright, now we have the public key and the private key with us. Let us create our Terraform configuration file using the public key, i.e. aws_key.pub.
+**Note:** We have to use public key aws_keys.pub inside the Terraform file to provision/start the instance and private key aws_keys to connect to instance.
 
 ## Create your first Terraform infrastructure (main.tf)
-Before we start writing Terraform script, the first thing to learn over here is - You need to save your configuration with **.tf** extension. We will start by     creating an empty main.tf file.
+Before we start writing Terraform script, the first thing to learn over here is - we need to save our configuration with **.tf** extension. We will start by     creating an empty main.tf file.
    
 ### Provider
 The first line of code that we are going to write is provider. We need to tell Terraform which cloud provider we are going to connect to e.g - AWS, Google, or Azure
@@ -182,28 +174,30 @@ Here is the aws_instance configuration -
 
 #### NOTE : "Key_name" & "Public_key" should be replaced with original value. 
        
-### Terraform commands
-Now we have completed all the pre-requisites for provisioning our first ec2 instance on the AWS.
+## Terraform commands
     
-### terraform init
-The first command which we are going to run is -
-    
-![image](https://user-images.githubusercontent.com/87687468/190346484-4aa27809-c1ab-44ed-989b-9dcb232345f3.png)
+### Initialize Terraform
+Run `terraform init` to initialize the Terraform deployment. This command is responsible for downloading all the dependencies which are required for the provider AWS.
+```
+  terraform init
+```
     
 ![image](https://user-images.githubusercontent.com/87687468/190346590-e5be6def-5d6b-470a-a0cb-1057a1334cd7.png)
-      
-The **terraform init** command is responsible for downloading all the dependencies which are required for the provider AWS.
-Once you issue the **terraform init** command it will download all the provider's dependencies on your local machine.
 
-### terraform plan
-This command will help you understand how many resources you are going to add or delete.
-Here is the command -
-
+### Create a Terraform execution plan
+Run `terraform plan` to create an execution plan.
+```
+  terraform plan
+```
 ![image](https://user-images.githubusercontent.com/87687468/190347066-fa9cd09e-b3f0-44f1-9621-043bbc4b972d.png)
-   
-### terraform apply
-This command will do some real stuff on AWS. Once you issue this command, it will connect to AWS and then finally provision an AWS instance.
-Here is the command -   
+
+**NOTE:** The **terraform plan** command is optional. We can directly run **terraform apply** command. But it is always better to check the resources about to be created.
+
+### Apply a Terraform execution plan
+Run `terraform apply` to apply the execution plan to your cloud infrastructure. Below command creates all required infrastructure.
+```
+  terraform apply main.tfplan
+```   
    
 ![image](https://user-images.githubusercontent.com/87687468/190377240-b37c607f-38b3-415d-836e-ae84abfd627b.png)
 
@@ -223,11 +217,13 @@ You can find the connect command from the aws console-
 
 ![image](https://user-images.githubusercontent.com/87687468/190621116-0e9fb285-960f-437d-bfc0-77352349372c.png)   
    
-### terraform destroy
-Now we have seen how to write your Terraform script and how to provision your EC2 instance.
-Let see how to remove or delete everything from AWS.
-Use the command -
+### Clean up resources
+Run `terraform destroy` to delete all resources created.
+```
+  terraform destroy
+```
+It will remove all resource groups, virtual networks, and all other resources created through Terraform.
    
 ![image](https://user-images.githubusercontent.com/87687468/190385964-c54095c3-88be-4eae-a131-0fb41cad24cb.png)
 
-It will remove all the running EC2 Instances.
+[<-- Return to Learning Path](/content/en/cloud/azure/#sections)
