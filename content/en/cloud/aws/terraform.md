@@ -52,7 +52,7 @@ Output when a key pair is generated:
 Before we start writing Terraform script, the first thing to learn over here is - we need to save our configuration with **.tf** extension. We will start by     creating an empty main.tf file.
    
 ### Provider
-The first line of code that we are going to write is provider. We need to tell Terraform which cloud provider we are going to connect to e.g - AWS, Google, or Azure
+We need to tell Terraform which cloud provider we are going to connect e.g - AWS, Google, or Azure
 As this article is focused on AWS, so we are going to mention AWS as our provider.
 Here is the basic syntax for the provider
       
@@ -60,7 +60,7 @@ Here is the basic syntax for the provider
       [CONFIG …]
       }
       
-1. "PROVIDER _ TYPE" - aws, google
+1. "PROVIDER_TYPE" - aws, google
 2. "NAME" - You can define your name
    
 This is how our main.tf will look like for AWS -
@@ -72,9 +72,7 @@ This is how our main.tf will look like for AWS -
       } 
       
 ### Resource - "aws_instance"
-Next, after defining the provider, we are going to define the resource. 
-So what do you mean by resource?
-Resource - It is something that we are going to provision/start on AWS. For this article, we are going to provision an EC2 instance on AWS.
+Next, after defining the provider, we are going to define the resource. Resource is something that we are going to provision/start on AWS. We are going to provision an EC2 instance on AWS.
 But before we provision the EC2 instance, we need to gather a few points -
    
 1. **ami** = you need to tell Terraform which AMI(Amazon Machine Image) you are going to use. Is it going to be Ubuntu, CentOS or something else
