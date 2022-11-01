@@ -57,7 +57,7 @@ By default, EC2 instances come with 8GiB of storage. You may want to increase th
    
 ![image](https://user-images.githubusercontent.com/87687468/189878035-87d9721f-c58e-4ce7-800b-093d4d3e59ce.png)
    
-We suggest you set Delete On Termination to yes. This will ensure that the volume is deleted and will not incur charges on you account once the instance is terminated.
+Set Delete On Termination to yes. This will ensure that the volume is deleted and will not incur charges on you account once the instance is terminated.
    
 ## Review and Launch
 Check the details in the summary box and press launch.
@@ -65,17 +65,11 @@ Check the details in the summary box and press launch.
 ![image](https://user-images.githubusercontent.com/87687468/189878839-3ef022f7-2be7-458a-b0ce-20cf5ee0bcaa.png)
 
 ## SSH into the launched instance
-Once the server is launched, we can login using SSH. To do that, we require access to the key pair (Pem file) which we have downloaded. If we check the permissions of the .pem file, we might see that the permission is set to -
-   
-   ```
-   rw-r--r--
-   ```
+We can login into created instance using SSH. To do that, we require access to the key pair (Pem file) which we have downloaded. By default, pem file permission is set to `rw-r--r--`. This is not allowed for SSH Pem files. We have to change the permission for this Pem file to 400, so that only the current user can read this Pem file.
 
-This means that other people can also read this Pem file. This is not allowed for SSH Pem files. So we will have to change the permission for this Pem file to 400.
-   
-   ```
-   $ chmod 400 demoserver.pem
-   ```
+```
+$ chmod 400 demoserver.pem
+```
    
 Now, only the owner of the Pem file can read it. In fact, these are permissions that a Pem file expects. Select the Instance by checking the box of the instance you want to connect to and GO TO » connect.
    
@@ -87,6 +81,6 @@ Here in SSH Client, you will see instructions that explain how to SSH into the i
    
 If in your terminal, you are in the same directory where the Pem file is present. you will not need the full path for the pem file. Use following command to ssh an instance:
    
-   ```
-   ssh -i "demoserver.pem" ubuntu@<Public IP/DNS address>
-   ```
+```
+ssh -i "demoserver.pem" ubuntu@<Public IP/DNS address>
+```
